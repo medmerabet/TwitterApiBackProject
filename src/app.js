@@ -15,6 +15,10 @@ app.use(bodyParser.urlencoded( {extended: true} ));
 app.use(bodyParser.json());
 
 
+const keywords_route = require('./api/routes/keywords_route');
+keywords_route(app);
+
+
 
 
 app.listen(port, hostname);

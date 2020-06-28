@@ -11,8 +11,7 @@ process.env.SECRET_KEY = 'secret'
 users.post('/register', (req, res) => {
   const today = new Date()
   const userData = {
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
+    fullname: req.body.fullname,
     email: req.body.email,
     password: req.body.password
   }
@@ -27,8 +26,7 @@ users.post('/register', (req, res) => {
           .then(user => {
             const payload = {
               _id: user._id,
-              first_name: user.first_name,
-              last_name: user.last_name,
+              fullname: user.fullname,
               email: user.email
             }
             let token = jwt.sign(payload, process.env.SECRET_KEY, {
@@ -56,8 +54,8 @@ users.post('/login', (req, res) => {
       if (user) {
         const payload = {
           _id: user._id,
-          first_name: user.first_name,
-          last_name: user.last_name,
+          fullname: user.fullname,
+         
           email: user.email
         }
         let token = jwt.sign(payload, process.env.SECRET_KEY, {

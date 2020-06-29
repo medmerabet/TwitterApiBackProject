@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const Users = require('../models/users_model');
 
+
 exports.list_all_users = (req, res) => {
     Users.find({}, (error, users) => {
         if (error) {
@@ -16,6 +17,7 @@ exports.list_all_users = (req, res) => {
         }
     })
 }
+
 
 exports.create_a_users = (req, res) => {
     let new_user = new Users(req.body);
@@ -45,14 +47,15 @@ exports.create_a_users = (req, res) => {
     }
 }
 
+
 exports.get_a_users = (req, res) => {
     try {
-        Users.findById(req.params.users_id, (error, user) => {
+        Users.findById(req.params.email, (error, user) => {
             if (error) {
                 res.status(400);
                 console.log(error);
                 res.json({
-                    message: "Id introuvable"
+                    message: "email introuvable"
                 });
             } else {
                 res.status(200);
@@ -70,7 +73,7 @@ exports.get_a_users = (req, res) => {
 
 exports.update_a_users = (req, res) => {
     try {
-        Users.findByIdAndUpdate(req.params.users_id, req.body, {
+        Users.findByIdAndUpdate(req.params.email, req.body, {
             new: true
         }, (error, user) => {
             if (error) {
@@ -95,7 +98,7 @@ exports.update_a_users = (req, res) => {
 
 exports.delete_a_users = (req, res) => {
     try {
-        Users.findByIdAndRemove(req.params.users_id, (error) => {
+        Users.findByIdAndRemove(req.params.email, (error) => {
             if (error) {
                 res.status(400);
                 console.log(error);
